@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>GG The Gaming Guide</title>
+        <title>TechIND</title>
       </Head>
       <main className={`min-h-screen p-4 pt-14 select-none`}>
         <div  >Test</div>
