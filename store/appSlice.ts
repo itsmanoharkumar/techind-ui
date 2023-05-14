@@ -1,17 +1,20 @@
-import { OPERATING_SYSTEM } from "@/types/enums";
 import { createSlice } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 
 const initialState = {
-  operatingSystem: OPERATING_SYSTEM.WINDOWS,
+  menuList: [],
+  footerData: {},
 };
 
 export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    setOperatingSystem(state, action) {
-      state.operatingSystem = action.payload;
+    setMenuList(state, action) {
+      state.menuList = action.payload;
+    },
+    setFooterData(state, action) {
+      state.footerData = action.payload;
     },
   },
   extraReducers: {
@@ -24,6 +27,7 @@ export const appSlice = createSlice({
   },
 });
 
-export const { setOperatingSystem } = appSlice.actions;
-export const selectOperatingSystem = (state: any) => state.app.operatingSystem;
+export const { setMenuList, setFooterData } = appSlice.actions;
+export const selectMenuList = (state: any) => state.app.menuList;
+export const selectFooterData = (state: any) => state.app.footerData;
 export default appSlice.reducer;
