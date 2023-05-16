@@ -4,4 +4,6 @@ export const API_ROUTES = {
   me: "/users/me",
   MENU: "/menus",
   FOOTER: "/footer",
+  PAGE: "/pages",
+  TECHNOLOGY: "/technologies",
 };

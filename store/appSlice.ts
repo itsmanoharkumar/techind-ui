@@ -4,6 +4,8 @@ import { HYDRATE } from "next-redux-wrapper";
 const initialState = {
   menuList: [],
   footerData: {},
+  pageData: {},
+  technologyData: {},
 };
 
 export const appSlice = createSlice({
@@ -16,6 +18,12 @@ export const appSlice = createSlice({
     setFooterData(state, action) {
       state.footerData = action.payload;
     },
+    setPageData(state, action) {
+      state.pageData = action.payload;
+    },
+    setTechnologyData(state, action) {
+      state.technologyData = action.payload;
+    },
   },
   extraReducers: {
     [HYDRATE]: (state, action) => {
@@ -27,7 +35,8 @@ export const appSlice = createSlice({
   },
 });
 
-export const { setMenuList, setFooterData } = appSlice.actions;
+export const { setMenuList, setFooterData, setPageData, setTechnologyData } =
+  appSlice.actions;
 export const selectMenuList = (state: any) => state.app.menuList;
 export const selectFooterData = (state: any) => state.app.footerData;
 export default appSlice.reducer;
