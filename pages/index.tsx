@@ -41,7 +41,6 @@ interface PageProps {
 }
 
 export default function Home({ menu, footer }: PageProps) {
-  console.log(footer);
   const dispatch = useDispatch();
   dispatch(setMenuList(menu));
   dispatch(setFooterData(footer));

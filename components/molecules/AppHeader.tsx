@@ -7,7 +7,7 @@ import { selectMenuList } from "@/store/appSlice";
 
 function AppBar() {
   const router = useRouter();
-  const currentRoute = router.route;
+  const currentRoute = router.asPath;
   const menuList = useSelector(selectMenuList);
 
   return (

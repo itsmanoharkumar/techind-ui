@@ -9,7 +9,7 @@ interface Props {
 export default function Menu({ currentPath, menuList }: Props) {
   return (
     <div className={"flex gap-[72px]"}>
-      {menuList.map((menu) => {
+      {menuList?.map((menu) => {
         const {
           id,
           attributes: { name, path, isVisible },
