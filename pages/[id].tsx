@@ -1,13 +1,19 @@
-import { useRouter } from "next/router";
 import qs from "qs";
 import fetcher from "@/service/service";
 import { API_ROUTES } from "@/helpers/constants";
-import { Menu } from "@/types/types";
+import { Menu, Page } from "@/types/types";
 import { useDispatch } from "react-redux";
-import { setFooterData, setMenuList } from "@/store/appSlice";
+import {
+  setFooterData,
+  setMenuList,
+  setPageData,
+  setTechnologyData,
+} from "@/store/appSlice";
+import Head from "next/head";
+import { pageComponentMap } from "@/helpers/componentMap";
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  const query = qs.stringify({
+  const menuQuery = qs.stringify({
     sort: ["order:asc"],
   });
   const footerQuery = qs.stringify({
@@ -23,14 +29,75 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
       },
     },
   });
-  const { data } = await fetcher(`${API_ROUTES.MENU}?${query}`);
+  const pageDataQuery = qs.stringify({
+    filters: {
+      name: params?.id,
+    },
+    populate: {
+      component: {
+        on: {
+          "page.banner": {
+            populate: "*",
+          },
+          "page.info-block-text": {
+            populate: "*",
+          },
+          "page.info-block-point": {
+            populate: {
+              bulletList: {
+                populate: "*",
+              },
+              image: "*",
+            },
+          },
+          "page.services": {
+            populate: {
+              serviceList: {
+                populate: "*",
+              },
+            },
+          },
+          "page.partner-list": {
+            populate: {
+              partnerList: {
+                populate: "*",
+              },
+            },
+          },
+          "page.technologies": {
+            populate: {
+              partnerList: {
+                populate: "*",
+              },
+            },
+          },
+        },
+      },
+    },
+  });
+  const technologyQuery = qs.stringify({
+    populate: {
+      list: {
+        populate: "*",
+      },
+    },
+  });
+  const { data: menuData } = await fetcher(`${API_ROUTES.MENU}?${menuQuery}`);
+  const { data: pageData } = await fetcher(
+    `${API_ROUTES.PAGE}?${pageDataQuery}`
+  );
   const { data: footerData } = await fetcher(
     `${API_ROUTES.FOOTER}?${footerQuery}`
   );
+  const { data: technologyData } = await fetcher(
+    `${API_ROUTES.TECHNOLOGY}?${technologyQuery}`
+  );
   return {
     props: {
-      menu: data,
+      menu: menuData,
       footer: footerData,
+      page: pageData && pageData.length > 0 ? pageData[0] : null,
+      technology: technologyData,
     },
   };
 }
@@ -39,10 +106,11 @@ export async function getStaticPaths() {
   const { data } = await fetcher(`${API_ROUTES.MENU}`);
 
   const paths = data?.map((item: any) => {
-    const path = item.attributes?.path;
+    const pageName = item.attributes?.pageName;
+    console.log(pageName);
     return {
       params: {
-        id: String(path),
+        id: String(pageName),
       },
     };
   });
@@ -55,16 +123,34 @@ export async function getStaticPaths() {
 interface PageProps {
   menu: Menu[];
   footer: any;
+  page: Page;
+  technology: any;
 }
 
-export default function GenericPage({ menu, footer }: PageProps) {
+export default function GenericPage({
+  menu,
+  footer,
+  page,
+  technology,
+}: PageProps) {
   const dispatch = useDispatch();
   dispatch(setMenuList(menu));
   dispatch(setFooterData(footer));
-  const router = useRouter();
+  dispatch(setPageData(page));
+  dispatch(setTechnologyData(technology));
+  const componentList = page?.attributes?.component;
   return (
     <>
-      <div>Test</div>
+      <Head>
+        <title>TechIND</title>
+      </Head>
+      <main className={`min-h-screen bg-[#F5F5FA]`}>
+        {componentList?.map((item: any, index: number) => {
+          const Component = pageComponentMap[item.__component];
+          if (!Component) return null;
+          return <Component key={index} {...item} technology={technology} />;
+        })}
+      </main>
     </>
   );
 }

@@ -12,14 +12,14 @@ export default function Menu({ currentPath, menuList }: Props) {
       {menuList?.map((menu) => {
         const {
           id,
-          attributes: { name, path, isVisible },
+          attributes: { name, pageName, isVisible },
         } = menu;
-        if (!isVisible) return null;
+        if (!isVisible || !pageName) return null;
         return (
           <MenuItem
             key={id}
             name={name}
-            path={path}
+            path={pageName || ""}
             currentPath={currentPath}
           />
         );

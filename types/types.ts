@@ -11,7 +11,8 @@ export type Menu = {
   attributes: {
     name: string;
     path: string;
-    isVisible: string;
+    isVisible: boolean;
+    pageName: string;
   };
 };
 
