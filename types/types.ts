@@ -85,6 +85,36 @@ export type InfoBlockText = {
   image: { data: StrapiImageData };
 };
 
+export type InfoBlockPoint = {
+  id: string;
+  __component: string;
+  name: string;
+  imageDirection: ImageDirection;
+  componentType: string;
+  image: { data: StrapiImageData };
+  bulletList: Array<List>;
+};
+
+export type Services = {
+  id: string;
+  __component: string;
+  name: string;
+  serviceList: Array<List>;
+};
+
+export type PartnerList = {
+  id: string;
+  __component: string;
+  partnerList: Array<List>;
+};
+
+export type List = {
+  id: string;
+  name: string;
+  description: string;
+  image: { data: StrapiImageData };
+};
+
 export enum ImageDirection {
   LEFT = "LEFT",
   RIGHT = "RIGHT",

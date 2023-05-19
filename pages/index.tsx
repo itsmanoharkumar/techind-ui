@@ -32,7 +32,36 @@ export async function getStaticProps() {
   const pageDataQuery = qs.stringify({
     populate: {
       component: {
-        populate: "*",
+        on: {
+          "page.banner": {
+            populate: "*",
+          },
+          "page.info-block-text": {
+            populate: "*",
+          },
+          "page.info-block-point": {
+            populate: {
+              bulletList: {
+                populate: "*",
+              },
+              image: "*",
+            },
+          },
+          "page.services": {
+            populate: {
+              serviceList: {
+                populate: "*",
+              },
+            },
+          },
+          "page.partner-list": {
+            populate: {
+              partnerList: {
+                populate: "*",
+              },
+            },
+          },
+        },
       },
     },
   });
@@ -77,12 +106,13 @@ export default function Home({ menu, footer, page, technology }: PageProps) {
   dispatch(setPageData(page));
   dispatch(setTechnologyData(technology));
   const componentList = page?.attributes?.component;
+  console.log(componentList);
   return (
     <>
       <Head>
         <title>TechIND</title>
       </Head>
-      <main className={`min-h-screen`}>
+      <main className={`min-h-screen bg-[#F5F5FA]`}>
         {componentList?.map((item: any, index: number) => {
           console.log(item.__component);
           const Component = pageComponentMap[item.__component];
