@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function MenuItem({ name, path, currentPath }: Props) {
-  const isActive = path === currentPath;
+  const isActive = `/${path}` === currentPath;
   const computedClassName = clsx({
     "text-[#226DFF] font-bold": isActive,
   });

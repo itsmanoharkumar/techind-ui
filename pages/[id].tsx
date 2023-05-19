@@ -71,6 +71,9 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
               },
             },
           },
+          "page.service-detail": {
+            populate: "*",
+          },
         },
       },
     },
@@ -146,6 +149,7 @@ export default function GenericPage({
       </Head>
       <main className={`min-h-screen bg-[#F5F5FA]`}>
         {componentList?.map((item: any, index: number) => {
+          console.log(item.__component);
           const Component = pageComponentMap[item.__component];
           if (!Component) return null;
           return <Component key={index} {...item} technology={technology} />;

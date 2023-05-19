@@ -133,3 +133,13 @@ export type Technology = {
   title: string;
   description: string;
 };
+
+export type ServiceDetail = {
+  id: string;
+  __component: string;
+  name: string;
+  description: string;
+  icon: { data: StrapiImageData };
+  image: { data: StrapiImageData };
+  position: ImageDirection;
+};

@@ -9,7 +9,6 @@ function AppBar() {
   const router = useRouter();
   const currentRoute = router.asPath;
   const menuList = useSelector(selectMenuList);
-
   return (
     <div className={`w-full h-[76px] bg-white`}>
       <div
