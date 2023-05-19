@@ -6,7 +6,6 @@ import Image from "next/image";
 interface Props extends MainBanner {}
 
 export default function MainBanner({ id, header, subHeader, image }: Props) {
-  console.log(image);
   const imageData = image?.data;
   const { width, height, src } = extractImageData(imageData, IMAGE_SIZE.LARGE);
 

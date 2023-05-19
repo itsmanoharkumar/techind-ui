@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { setFooterData, setMenuList } from "@/store/appSlice";
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  console.log(params);
   const query = qs.stringify({
     sort: ["order:asc"],
   });

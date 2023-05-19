@@ -122,15 +122,13 @@ export enum ImageDirection {
 
 export type TechnologyItem = {
   id: string;
-  name: string;
-  image: { data: StrapiImageData };
-  description: string;
+  attributes: {
+    name: string;
+    list: Array<List>;
+  };
 };
 
 export type Technology = {
-  id: string;
-  attributes: {
-    name: string;
-    list: TechnologyItem[];
-  };
+  title: string;
+  description: string;
 };

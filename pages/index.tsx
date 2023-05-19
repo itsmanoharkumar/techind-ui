@@ -1,7 +1,7 @@
 import Head from "next/head";
 import fetcher from "@/service/service";
 import { API_ROUTES } from "@/helpers/constants";
-import { Menu } from "@/types/types";
+import { Menu, Page } from "@/types/types";
 import qs from "qs";
 import { useDispatch } from "react-redux";
 import {
@@ -30,6 +30,9 @@ export async function getStaticProps() {
     },
   });
   const pageDataQuery = qs.stringify({
+    filter: {
+      name: "Home",
+    },
     populate: {
       component: {
         on: {
@@ -61,6 +64,13 @@ export async function getStaticProps() {
               },
             },
           },
+          "page.technologies": {
+            populate: {
+              partnerList: {
+                populate: "*",
+              },
+            },
+          },
         },
       },
     },
@@ -74,7 +84,7 @@ export async function getStaticProps() {
   });
   const { data: menuData } = await fetcher(`${API_ROUTES.MENU}?${menuQuery}`);
   const { data: pageData } = await fetcher(
-    `${API_ROUTES.PAGE}/1/?${pageDataQuery}`
+    `${API_ROUTES.PAGE}?${pageDataQuery}`
   );
   const { data: footerData } = await fetcher(
     `${API_ROUTES.FOOTER}?${footerQuery}`
@@ -86,7 +96,7 @@ export async function getStaticProps() {
     props: {
       menu: menuData,
       footer: footerData,
-      page: pageData,
+      page: pageData && pageData.length > 0 ? pageData[0] : null,
       technology: technologyData,
     },
   };
@@ -95,7 +105,7 @@ export async function getStaticProps() {
 interface PageProps {
   menu: Menu[];
   footer: any;
-  page: any;
+  page: Page;
   technology: any;
 }
 
@@ -106,7 +116,6 @@ export default function Home({ menu, footer, page, technology }: PageProps) {
   dispatch(setPageData(page));
   dispatch(setTechnologyData(technology));
   const componentList = page?.attributes?.component;
-  console.log(componentList);
   return (
     <>
       <Head>
@@ -114,10 +123,9 @@ export default function Home({ menu, footer, page, technology }: PageProps) {
       </Head>
       <main className={`min-h-screen bg-[#F5F5FA]`}>
         {componentList?.map((item: any, index: number) => {
-          console.log(item.__component);
           const Component = pageComponentMap[item.__component];
           if (!Component) return null;
-          return <Component key={index} {...item} />;
+          return <Component key={index} {...item} technology={technology} />;
         })}
       </main>
     </>

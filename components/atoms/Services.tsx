@@ -13,7 +13,7 @@ export default function Services({ name, serviceList }: Props) {
       </div>
       <div
         className={
-          "px-[110px] pt-[50px] flex flex-wrap gap-x-[100px] gap-y-[165px]"
+          "px-[110px] pt-[50px] flex flex-wrap gap-x-[100px] gap-y-[165px] justify-center"
         }
       >
         {serviceList.map(({ name, description, image }, index) => {
