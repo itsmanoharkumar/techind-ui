@@ -17,7 +17,7 @@ export default function InfoBlockText({
   return (
     <div className={"flex pt-[80px]"}>
       <div className={"w-1/2 pl-[120px] pr-[214px] mt-[30px]"}>
-        <div className={"w-[130px] text-[36px] mb-[70px] text-[#454654]"}>
+        <div className={"w-[187px] text-[36px] mb-[70px] text-[#454654]"}>
           {name}
         </div>
         <div className={"font-bold text-[36px] text-[#3D82EA] mb-[20px]"}>
