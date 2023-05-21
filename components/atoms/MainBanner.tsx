@@ -23,12 +23,10 @@ export default function MainBanner({ id, header, subHeader, image }: Props) {
           "absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50"
         }
       >
-        <div
-          className={"text-white uppercase text-[46px] mb-18px font-bold opac"}
-        >
+        <div className={"text-white uppercase text-[46px] mb-[18px] font-bold"}>
           {header}
         </div>
-        <div className={"text-white text-[30px] max-w-[1300px]"}>
+        <div className={"text-white text-[30px] max-w-[1400px]"}>
           {subHeader}
         </div>
       </div>

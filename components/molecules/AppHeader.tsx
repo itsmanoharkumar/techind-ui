@@ -4,6 +4,7 @@ import Menu from "@/components/molecules/Menu";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectMenuList } from "@/store/appSlice";
+import Link from "next/link";
 
 function AppBar() {
   const router = useRouter();
@@ -14,7 +15,9 @@ function AppBar() {
       <div
         className={"w-full h-full flex px-[20px] items-center justify-between"}
       >
-        <DarkLogo />
+        <Link href={"/"}>
+          <DarkLogo />
+        </Link>
         <Menu menuList={menuList} currentPath={currentRoute} />
       </div>
     </div>
