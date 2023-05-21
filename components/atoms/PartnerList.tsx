@@ -9,7 +9,7 @@ export default function PartnerList({ partnerList }: Props) {
   return (
     <div
       className={
-        "flex w-full overflow-auto justify-around bg-[#F3F3F3] py-[30px] items-center my-[200px]"
+        "flex w-full overflow-auto justify-around bg-[#F3F3F3] py-[30px] items-center mb-[200px]"
       }
     >
       {partnerList.map(({ name, image }, index) => {

@@ -10,7 +10,7 @@ export default function MainBanner({ id, header, subHeader, image }: Props) {
   const { width, height, src } = extractImageData(imageData, IMAGE_SIZE.LARGE);
 
   return (
-    <div className="w-full relative bg-pink-600">
+    <div className="w-full relative bg-pink-600 mb-[76px]">
       <Image
         className={"w-full object-cover"}
         src={src}
@@ -20,10 +20,12 @@ export default function MainBanner({ id, header, subHeader, image }: Props) {
       />
       <div
         className={
-          "absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black opacity-50"
+          "absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black bg-opacity-50"
         }
       >
-        <div className={"text-white uppercase text-[46px] mb-18px font-bold"}>
+        <div
+          className={"text-white uppercase text-[46px] mb-18px font-bold opac"}
+        >
           {header}
         </div>
         <div className={"text-white text-[30px] max-w-[1300px]"}>
