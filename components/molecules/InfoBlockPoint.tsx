@@ -11,7 +11,7 @@ export default function InfoBlockPoint({ name, image, bulletList }: Props) {
   const imageData = image?.data;
   const { width, height, src } = extractImageData(imageData, IMAGE_SIZE.LARGE);
   return (
-    <div className={"flex pt-[180px]"}>
+    <div className={"flex mb-[200px]"}>
       <div className={"w-1/2 relative"}>
         <Image
           className={"absolute bottom-0 left-0"}
@@ -32,7 +32,7 @@ export default function InfoBlockPoint({ name, image, bulletList }: Props) {
             <Image src={leftArrow} alt={"Arrow"} />
           </div>
         </div>
-        <div>
+        <div className={"flex justify-end"}>
           <BulletPointList bulletList={bulletList} />
         </div>
       </div>

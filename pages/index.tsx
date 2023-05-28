@@ -71,6 +71,9 @@ export async function getStaticProps() {
               },
             },
           },
+          "contact.contact-form": {
+            populate: "*",
+          },
         },
       },
     },
@@ -121,8 +124,11 @@ export default function Home({ menu, footer, page, technology }: PageProps) {
       <Head>
         <title>TechIND</title>
       </Head>
-      <main className={`min-h-screen bg-[#F5F5FA]`}>
+      <main
+        className={`min-h-screen bg-[#F5F5FA] overflow-hidden max-w-[1920px] mx-auto`}
+      >
         {componentList?.map((item: any, index: number) => {
+          console.log(item.__component);
           const Component = pageComponentMap[item.__component];
           if (!Component) return null;
           return <Component key={index} {...item} technology={technology} />;

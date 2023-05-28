@@ -74,6 +74,19 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
           "page.service-detail": {
             populate: "*",
           },
+          "contact.contact-form": {
+            populate: "*",
+          },
+          "contact.enquiry": {
+            populate: "*",
+          },
+          "page.tiles": {
+            populate: {
+              tileList: {
+                populate: "*",
+              },
+            },
+          },
         },
       },
     },
@@ -147,7 +160,7 @@ export default function GenericPage({
       <Head>
         <title>TechIND</title>
       </Head>
-      <main className={`min-h-screen bg-[#F5F5FA]`}>
+      <main className={`min-h-screen bg-[#F5F5FA] overflow-hidden`}>
         {componentList?.map((item: any, index: number) => {
           console.log(item.__component);
           const Component = pageComponentMap[item.__component];

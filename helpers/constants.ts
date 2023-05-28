@@ -6,4 +6,6 @@ export const API_ROUTES = {
   FOOTER: "/footer",
   PAGE: "/pages",
   TECHNOLOGY: "/technologies",
+  LEAD: "/leads",
+  ENQUIRY: "/enquiries",
 };

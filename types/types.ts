@@ -30,16 +30,18 @@ export type FooterLinkGroup = {
   linkGroup: LinkGroup[];
 };
 
+export type ContactDetail = {
+  email: string;
+  mobileNumber: string;
+  address: string;
+};
+
 export type Footer = {
   id: string;
   attributes: {
     social: SocialLink[];
     group: FooterLinkGroup[];
-    contact: {
-      email: string;
-      mobileNumber: string;
-      address: string;
-    };
+    contact: ContactDetail;
   };
 };
 
@@ -142,4 +144,27 @@ export type ServiceDetail = {
   icon: { data: StrapiImageData };
   image: { data: StrapiImageData };
   position: ImageDirection;
+};
+
+export type ContactFormSection = {
+  id: string;
+  __component: string;
+  header: string;
+  description: string;
+  contactDetail: ContactDetail;
+  geoImage: { data: StrapiImageData };
+};
+export type EnquirySection = {
+  id: string;
+  __component: string;
+  header: string;
+  description: string;
+  image: { data: StrapiImageData };
+};
+
+export type TileSection = {
+  id: string;
+  __component: string;
+  name: string;
+  tileList: Array<List>;
 };

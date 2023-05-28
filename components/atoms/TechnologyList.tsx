@@ -11,7 +11,7 @@ export default function TechnologyList({ technology }: Props) {
   return (
     <div
       className={
-        "flex gap-x-[140px] gap-y-[30px] justify-center mx-[179px] flex-wrap pb-[140px]"
+        "flex gap-x-[140px] gap-y-[30px] justify-center mx-[179px] flex-wrap"
       }
     >
       {technology?.map(({ id, attributes: { name, list } }) => {

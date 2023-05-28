@@ -1,12 +1,12 @@
-import { Services } from "@/types/types";
+import { TileSection } from "@/types/types";
 import Image from "next/image";
+import rightArrow from "@/images/Arrow 2.png";
 import { extractImageData } from "@/helpers/helper";
 import { IMAGE_SIZE } from "@/types/enums";
-import rightArrow from "@/images/Arrow 2.png";
 
-interface Props extends Services {}
+interface Props extends TileSection {}
 
-export default function Services({ name, serviceList }: Props) {
+export default function TileSection({ name, tileList }: Props) {
   return (
     <div className={"px-[120px] mb-[200px]"}>
       <div
@@ -17,22 +17,26 @@ export default function Services({ name, serviceList }: Props) {
       </div>
       <div
         className={
-          "px-[110px] pt-[50px] flex flex-wrap gap-x-[100px] gap-y-[165px] justify-center"
+          "px-[110px] pt-[50px] flex flex-wrap gap-[20px] justify-center"
         }
       >
-        {serviceList.map(({ name, description, image }, index) => {
-          const computedClassName = index % 2 === 0 ? "" : "mt-[100px]";
+        {tileList.map(({ name, description, image }, index) => {
+          const computedClassName =
+            index % 2 === 0
+              ? "bg-[#002D70] text-white"
+              : "bg-white text-[#454654]";
           const imageData = image?.data;
           const { width, height, src } = extractImageData(
             imageData,
-            IMAGE_SIZE.LARGE
+            IMAGE_SIZE.SMALL
           );
 
           return (
             <div
               key={index}
               className={
-                "w-[368px] text-[21px] text-[#454654] " + computedClassName
+                "w-[478px] text-[21px] rounded-xl shadow p-8 " +
+                computedClassName
               }
             >
               <div className={"w-full flex justify-center mb-[40px]"}>
@@ -44,10 +48,10 @@ export default function Services({ name, serviceList }: Props) {
                   height={height}
                 />
               </div>
-              <div className={"text-[27px] font-bold text-[#454654]"}>
+              <div className={"text-[27px] font-bold text-center mb-[18px]"}>
                 {name}
               </div>
-              <div className={"text-[#454654] text-[18px]"}>{description}</div>
+              <div className={"text-[16px] text-center"}>{description}</div>
             </div>
           );
         })}
