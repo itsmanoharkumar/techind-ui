@@ -8,7 +8,7 @@ const withPWA = require("next-pwa")({
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["techinds.azurewebsites.net", "localhost"],
+    domains: ["techinds.blob.core.windows.net", "localhost"],
   },
 };
 
